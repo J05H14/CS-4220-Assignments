@@ -35,3 +35,25 @@ const arr2 = [5, 2, 'a', 4, '7', true, 'b', 'c', 7, '8', false]
 const sumArr2 = sumArray(arr2)
 console.log('Original Array: ' + arr2)
 console.log('SumArray: ' + sumArr2)
+
+
+//3. Write a function called countingWords and it counts the number of times they are present in the array.
+function countingWords(arr){
+    let words = {}
+    arr.forEach(word => {
+        if(words[word] == undefined){
+            
+            words[word] = 0
+
+        }
+        words[word] += 1
+    })
+    
+    return words
+}
+
+//Testing Question 3
+console.log('Question 3 Test')
+const arr3 = ['hi', 'hi', 'hello', 'world', 'hello', 'hi' , 'greetings']
+console.log(countingWords(arr3))
+
