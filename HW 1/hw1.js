@@ -55,5 +55,6 @@ function countingWords(arr){
 //Testing Question 3
 console.log('Question 3 Test')
 const arr3 = ['hi', 'hi', 'hello', 'world', 'hello', 'hi' , 'greetings']
+console.log("Array: " + arr3)
 console.log(countingWords(arr3))
 
