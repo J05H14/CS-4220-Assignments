@@ -58,3 +58,41 @@ const arr3 = ['hi', 'hi', 'hello', 'world', 'hello', 'hi' , 'greetings']
 console.log("Array: " + arr3)
 console.log(countingWords(arr3))
 
+//4. Write a function called createAnimals and is able to create an object.
+function createAnimals(arr){
+    let animalObj = {}
+    
+    for(let i = 0; i < arr.length ; i++){
+        const array = arr[i]
+        animalObj[i] = {}
+        array.forEach(obj => {
+            keys = Object.keys(obj)
+            for(let j = 0; j < keys.length; j+=2){
+                animalObj[i][obj[keys[j]]] = obj[keys[j+1]]
+            }
+            
+        })
+        console.log(animalObj[i])
+    }
+    return animalObj
+}
+
+//Testing Question 4
+console.log('Question 4 Test')
+
+const arr4 =
+    [
+       [
+           { property: 'name', assign: 'Garfield'},
+           { property: 'owner', assign: 'Jon Arbuckle'},
+           { property: 'type', assign: 'cat' }
+       ],
+       [
+           { property: 'name',assign: 'Snoopy' },
+           { property: 'owner',assign: 'Charlie Brown' },
+           { property: 'type',assign: 'dog' }
+       ]
+   ]
+   
+const animals = createAnimals(arr4)
+console.log(animals)
