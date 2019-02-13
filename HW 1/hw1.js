@@ -58,6 +58,7 @@ const arr3 = ['hi', 'hi', 'hello', 'world', 'hello', 'hi' , 'greetings']
 console.log("Array: " + arr3)
 console.log(countingWords(arr3))
 
+
 //4. Write a function called createAnimals and is able to create an object.
 function createAnimals(arr){
     let animalObj = {}
