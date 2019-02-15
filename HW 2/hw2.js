@@ -40,6 +40,7 @@ print(group2)
 class GroceryList {
     constructor(list = []){
         this.list = list
+        this.total = 0
     }
     addItem({item, quantity = 1} = grocery){
         this.list.push({item, quantity})
@@ -50,40 +51,59 @@ class GroceryList {
         for(let i = 0; i < this.list.length; i++){
             const grocery = this.list[i]
             const {item, quantity} = grocery
-            if(itemName == item.toLowerCase()){
-                if(quantity == 1){
-                    this.list.splice(i)
-                }
-                else{
-                    grocery.quantity -= 1
-                }
+            if(itemName == item.toLowerCase() && quantity == 1){ 
+                this.list.splice(i)
+            }
+            else if(itemName == item.toLowerCase() && quantity > 1){
+                grocery.quantity -= 1
             }
         }
         return this
     }
     addPrice(itemName, price){
-
+        itemName = itemName.toLowerCase()
+        for(let i = 0; i < this.list.length; i++){
+            const grocery = this.list[i]
+            const {item, quantity} = grocery
+            if(itemName == item.toLowerCase()){
+                grocery.price = price
+            }
+        }
+        return this
     }
     addTotal(){
-
+        this.list.forEach(grocery => {
+            const {item, quantity, price = 0} = grocery
+            this.total += price * quantity
+        })
+        this.total *= 100
+        this.total = Math.ceil(this.total)
+        this.total /= 100
+        return this
     }
     get print(){
         let stringList = ''
         this.list.forEach(grocery => {
-            stringList += 'Item: ' + grocery.item + ' | ' + 'Quantity: ' + grocery.quantity + '\n'
+            const {item, quantity, price = 'n/a'} = grocery
+            stringList += 'Item: ' + item + ' | Quantity: ' + quantity + ' | Price: ' + price + '\n'
 
         })
-        
+        stringList += "Total : " + this.total
         return console.log(stringList)
     }
 }
 
 const cart = new GroceryList()
 cart
-    .addItem({ item: 'bread'})
-    .addItem({ item: 'soup', quantity: '3'})
-    .removeItem('soup')
-    .print
+            .addItem({ item: 'bread', quantity: '1'})
+            .addItem({ item: 'soup', quantity: '3'})
+            .addItem({ item: 'chips', quantity: '4'})
+            .addItem({ item: 'soda', quantity: '1'})
+            .addPrice('chiPs', 5.99)
+            .removeItem('Chips')
+            .addPrice('soda', 1.04)
+            .addTotal()
+            .print
 
 // testItem = [{ item: 'bread', quantity: '1'}, { item: 'soup', quantity: '3'}]
 // testStr = 'bread'
