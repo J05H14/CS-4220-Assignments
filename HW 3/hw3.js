@@ -58,4 +58,6 @@ async function iterateNumbers(numbers){
     console.log(`Total:\n${total}`)
 }
 
+//Testing Question 1
+console.log("Question 1 Test");
 iterateNumbers([1, 2, 3, 5, 8, 13, 21])
