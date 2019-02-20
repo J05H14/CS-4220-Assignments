@@ -66,6 +66,7 @@ async function iterateNumbers(numbers) {
 }
 
 //Testing Question 1
+console.log("Question 1 Test");
 iterateNumbers([1, 2, 3, 5, 8, 13, 21]);
 
 //2. Using callbacks syntax write a set of functions that checks and makes a list of todos based on priorities.
@@ -77,34 +78,43 @@ const checkPriority = (todo, callback) => {
     } = todo;
     setTimeout(() => {
         //error for case if no priority
-        const error = !priority ? name: null;
+        const error = !priority ? `${name} has no priority` : null;
         callback(error, todo);
     }, 90);
 };
 
+// const addPriority = (todo) => {
+//     const list = []
+//     checkPriority(todo, (err, result) => {
+//         if (err) {
+//             // console.log(err);
+//         } else {
+//             console.log(result);
+//             list.push(result)
+//         }
+        
+//     });
+// };
+
 const makePriorityList = (todos) => {
-    const priorities = [];
-    const errors = [];
+    list = [];
     for(let i = 0; i < todos.length; i++){
         const todo = todos[i];
         checkPriority(todo, (err, result) => {
             if (err) {
-               errors.push(err);
+                // console.log(err);
             } else {
                 // console.log(result);
-                priorities.push(result);
-                // console.log(list);
-            }
-            if(i == todos.length-1){
-                console.log('Priority');
-                console.log(priorities);
-                console.log('Missing Priority');
-                console.log(errors);
+                list.push(result);
             }
         });
+        if(i == todos.length-1){
+            console.log(list);
+        }
     }
-};
+}
 //Testing Question 2
+console.log("Question 2 Test");
 const todos = [{
         name: 'get coffee',
         priority: 9
