@@ -70,11 +70,22 @@ iterateNumbers([1, 2, 3, 5, 8, 13, 21]);
 
 //2. Using callbacks syntax write a set of functions that checks and makes a list of todos based on priorities.
 //check proority function
-const checkPriority = (todo, callback) => {
-    const {
-        name,
-        priority
-    } = todo;
+
+
+const checkPriority = (todo) => {
+    priorityCallback(todo, (err, res) => {
+        if(err){
+            console.log(err);
+        }
+        else{
+            console.log(res);
+        }
+    });
+    
+};
+
+const priorityCallback = (todo, callback) => {
+    const {name, priority} = todo;
     setTimeout(() => {
         //error for case if no priority
         const error = !priority ? name: null;
@@ -87,7 +98,7 @@ const makePriorityList = (todos) => {
     const errors = [];
     for(let i = 0; i < todos.length; i++){
         const todo = todos[i];
-        checkPriority(todo, (err, result) => {
+        priorityCallback(todo, (err, result) => {
             if (err) {
                errors.push(err);
             } else {
@@ -122,7 +133,7 @@ const todos = [{
         priority: 8
     }
 ];
-// addPriority(todos[0]);
+// checkPriority(todos[0]);
 makePriorityList(todos);
 
 // Priority
