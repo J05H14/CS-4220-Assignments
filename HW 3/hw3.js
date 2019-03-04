@@ -106,7 +106,7 @@ const makePriorityList = (todos) => {
 //Testing Question 2
 const todos = [{
         name: 'get coffee',
-        priority: 9
+        priority: 500
     },
     {
         name: 'clean room',
@@ -114,11 +114,11 @@ const todos = [{
     },
     {
         name: 'go to CS4220',
-        priority: 4
+        priority: 40
     },
     {
         name: 'do homework before due date',
-        priority: 8
+        priority: 80
     }
 ];
 // checkPriority(todos[0]);
