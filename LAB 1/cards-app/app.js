@@ -15,17 +15,61 @@ async function draw(shuffle = false, count = 1) {
 
     console.log('-- CARDS --')
     console.log(`YOU HAVE DRAWN ${result.cards.length} CARDS`)
+    console.log(result)
+    console.log(deckId)
 
     const drawAnother = await anotherCardPrompt()
     console.log(drawAnother)
-
+    
     if (drawAnother.card) {
         // draw again from the SAME deck
-        // print(???)
+        const drawOneResponse = await superagent.get(`${base}/${deckId}/draw/?count=1`)
+        // result.cards.push(draw.body.cards)
+        const draw = drawOneResponse.body
+        // console.log(draw)
+        print(result, draw)
     } else {
-        // print(???)
+        print(result)
     }
+async function print(result, draw){
+    let totalVal = 0
 
+    for(let i = 0; i < result.cards.length; i++){
+        const card = result.cards[i]
+        let number = 0
+        const suit = card.suit
+        const value = card.value
+        if(value == 'KING' || value == 'QUEEN' || value == 'JACK')
+            number = parseInt(10)
+        else if(value == 'ACE')
+            number = parseInt(11)
+        else
+            number = parseInt(value)
+        totalVal += number
+        console.log(`${value} of ${suit}`)
+    }
+    if(draw){
+        const card = draw.cards[0]
+        let number = 0
+        const suit = card.suit
+        const value = card.value
+        if(value == 'KING' || value == 'QUEEN' || value == 'JACK')
+            number = parseInt(10)
+        else if(value == 'ACE')
+            number = parseInt(11)
+        else
+            number = parseInt(value)
+        totalVal += number
+        console.log(`${value} of ${suit}`)
+    }
+    console.log(`TOTAL CARD VALUE: ${totalVal}`)
+    
+    if(draw)
+        console.log(draw.remaining)
+    else
+        console.log(`REMAINING CARDS: ${result.remaining}`)
+
+}
     /* RUN the app using
         node cli.js draw --shuffle true --count 3
 
