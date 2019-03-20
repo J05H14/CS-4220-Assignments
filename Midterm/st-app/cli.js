@@ -1,6 +1,8 @@
 const app = require('./app')
 const yargs = require('yargs')
 
+// app.logo()
+
 const flags = yargs.usage('$0: Usage <cmd> [options]')
     .command({
         command: 'search',
