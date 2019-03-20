@@ -8,7 +8,8 @@ async function search(teamString = 'los_angeles'){
 const print = (teams) => {
     console.log('=======TEAMS=======')
     teams.forEach(team => {
-        console.log(team.strTeam)
+        console.log(`Name: ${team.strTeam}\nLeague: ${team.strLeague}\nID: ${team.idTeam}`)
+        console.log('---------------')
     })
 }
 
