@@ -4,7 +4,7 @@ const superagent = require('superagent')
 const _fetch = (command) => {
     return superagent.get(`${config.url}/${command}`)
         .then(response => response.body)
-        .catch(error => error.response.body)
+        // .catch(error => error.response)
 }
 
 exports.search = (teamString) => {
