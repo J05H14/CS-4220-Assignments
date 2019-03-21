@@ -5,7 +5,7 @@ async function lookupPrompt(result){
 
     console.log(typeof(result))
     const showTeams = result.map(team => {
-        return {name: team.strTeam, leage: team.strLeague}
+        return {name: team.strTeam, value: team.idTeam}
     })
 
     return inquirer.prompt([{
@@ -30,6 +30,7 @@ async function search(teamString = 'los_angeles'){
 
     teamsLogo()
 
+    // console.log(teams)
     const selectedTeam = await lookupPrompt(teams)
 
     console.log(selectedTeam)
