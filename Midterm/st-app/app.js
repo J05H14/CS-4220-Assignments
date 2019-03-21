@@ -1,15 +1,46 @@
 const sportsteams = require('sportsteams')
+const inquirer = require('inquirer')
+
+async function lookupPrompt(result){
+
+    console.log(typeof(result))
+    const showTeams = result.map(team => {
+        return {name: team.strTeam, leage: team.strLeague}
+    })
+
+    return inquirer.prompt([{
+        type: 'list',
+        message: 'Select a Team for Details',
+        name: 'teams',
+        choices: showTeams,
+        validate: showTeams => {
+            if (showTeams == null){
+                return 'No Teams matching your search'
+            }
+            else{
+                return true;
+            }
+        }
+    }])
+}
 
 async function search(teamString = 'los_angeles'){
-    const teams = await sportsteams.search(teamString)
+    const searchResult = await sportsteams.search(teamString)
+    const teams = searchResult.teams
 
-    print(teams.teams)
+    teamsLogo()
+
+    const selectedTeam = await lookupPrompt(teams)
+
+    console.log(selectedTeam)
+
+    // print(teams)
 }
 const print = (teams) => {
-    teamsLogo()
+        
     teams.forEach(team => {
         console.log(`Name: ${team.strTeam}\nLeague: ${team.strLeague}\nID: ${team.idTeam}`)
-        console.log('---------------')
+        console.log('____________________________________________________________________________________________________\n')
     })
 }
 
@@ -26,6 +57,8 @@ const teamsLogo = () => {
         '\n| |              | || |              | || |              | || |              | || |              | |' +
         '\n| \'--------------\' || \'--------------\' || \'--------------\' || \'--------------\' || \'--------------\' |' +
         '\n \'----------------\'  \'----------------\'  \'----------------\'  \'----------------\'  \'----------------\'' )
+    console.log(' __________________________________________________________________________________________________\n|__________________________________________________________________________________________________|\n')
+
 }
 module.exports = {
     search,
