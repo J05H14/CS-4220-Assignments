@@ -3,10 +3,10 @@ const inquirer = require('inquirer')
 
 async function lookupPrompt(result){
 
-    console.log(typeof(result))
     const showTeams = result.map(team => {
         return {name: team.strTeam, value: team.idTeam}
     })
+    
 
     return inquirer.prompt([{
         type: 'list',
@@ -24,7 +24,16 @@ async function lookupPrompt(result){
     }])
 }
 
-async function search(teamString = 'los_angeles'){
+async function lookup(id){
+    const result = await sportsteams.lookup(id)
+
+    const team = result.teams[0]
+
+    console.log(id)
+    console.log(team)
+}
+
+async function search(teamString){
     const searchResult = await sportsteams.search(teamString)
     const teams = searchResult.teams
 
@@ -33,7 +42,7 @@ async function search(teamString = 'los_angeles'){
     // console.log(teams)
     const selectedTeam = await lookupPrompt(teams)
 
-    console.log(selectedTeam)
+    lookup(selectedTeam.teams)
 
     // print(teams)
 }
