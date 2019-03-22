@@ -29,8 +29,8 @@ async function lookup(id){
 
     const team = result.teams[0]
 
-    console.log(id)
-    console.log(team)
+    print(team)
+    // console.log(team)
 }
 
 async function search(teamString){
@@ -46,12 +46,22 @@ async function search(teamString){
 
     // print(teams)
 }
-const print = (teams) => {
-        
-    teams.forEach(team => {
-        console.log(`Name: ${team.strTeam}\nLeague: ${team.strLeague}\nID: ${team.idTeam}`)
-        console.log('____________________________________________________________________________________________________\n')
-    })
+const print = (team) => {
+    console.log(`Team Name: ${team.strTeam}\t League: ${team.strLeague}`)
+    console.log('-----------------------------------')
+    console.log(team.strStadiumLocation != null ? `Home City: ${team.strStadiumLocation}` : 'Home City: Not Available')
+    console.log('-----------------------------------')
+    console.log(team.intFormedYear != null ? `Year Formed: ${team.intFormedYear}` : 'Year Formed: Not Available')
+    console.log('-----------------------------------')
+    console.log(team.strManager != '' ? `Current Coach: ${team.strManager}` : 'Current Coach: Not Available');
+    console.log('-----------------------------------')
+    console.log(team.strStadium != null ? `Current Stadium: ${team.strStadium}` : 'Current Stadium: Not Available')
+    console.log('-----------------------------------')
+    console.log(team.strDescriptionEN != null ? `Description:\n${team.strDescriptionEN}` : 'Description: Not Available')
+    // teams.forEach(team => {
+    //     console.log(`Name: ${team.strTeam}\nLeague: ${team.strLeague}\nID: ${team.idTeam}`)
+    //     console.log('____________________________________________________________________________________________________\n')
+    // })
 }
 
 const teamsLogo = () => {
