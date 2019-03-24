@@ -11,7 +11,7 @@ const flags = yargs.usage('$0: Usage <cmd> [options]')
         builder: (yargs) => {
             return yargs.option('t', {
                 alias: 'team',
-                describe: 'name of the team you are searching for'
+                describe: 'name of the team you are searching for (Put a "_" in place of spaces)'
             })
         },
         handler: (argv) => {app.search(argv.team)}
