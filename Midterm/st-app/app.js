@@ -1,6 +1,20 @@
 const sportsteams = require('sportsteams')
 const inquirer = require('inquirer')
 
+async function search(teamString){
+    const searchResult = await sportsteams.search(teamString)
+    const teams = searchResult.teams
+
+    teamsLogo()
+
+    // console.log(teams)
+    const selectedTeam = await lookupPrompt(teams)
+
+    lookup(selectedTeam.teams)
+
+    // print(teams)
+}
+
 async function lookupPrompt(result){
 
     const showTeams = result.map(team => {
@@ -33,19 +47,6 @@ async function lookup(id){
     // console.log(team)
 }
 
-async function search(teamString){
-    const searchResult = await sportsteams.search(teamString)
-    const teams = searchResult.teams
-
-    teamsLogo()
-
-    // console.log(teams)
-    const selectedTeam = await lookupPrompt(teams)
-
-    lookup(selectedTeam.teams)
-
-    // print(teams)
-}
 const print = (team) => {
     console.log(`Team Name: ${team.strTeam}\t League: ${team.strLeague}`)
     console.log('-----------------------------------')
