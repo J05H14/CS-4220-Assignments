@@ -1,14 +1,16 @@
 window.onload = function(){
     const app = document.getElementById('root')
 
-    const p = document.createElement('p')
+    const title = document.createElement('div')
 
-    const label = document.createElement('label')
-    label.textContent = 'Converter'
+    const instructions = document.createElement('h1')
+    instructions.textContent = 'Enter the Temperature to be Converted'
 
-    const text = document.createElement('input')
-    text.setAttribute('type', 'number')
-    text.setAttribute('id', 'temp')
+    const inp = document.createElement('input')
+    inp.setAttribute('type', 'text')
+    inp.setAttribute('id', 'temp')
+
+    const tempPick = document.createElement('div')
 
     const radioF = document.createElement('input')
     radioF.setAttribute('type', 'radio')
@@ -27,55 +29,66 @@ window.onload = function(){
     const radioCLabel = document.createElement('CLabel')
     radioCLabel.textContent = 'to Celcius'
 
+
     const button = document.createElement('input')
     button.setAttribute('type', 'button')
-    button.setAttribute('value', 'to C')
+    button.setAttribute('value', 'Submit')
     button.setAttribute('id', 'btnConvert')
     button.setAttribute('onclick', 'convert()')
 
+    const out = document.createElement('h2')
+
     const output = document.createElement('output')
 
-    console.log(label.textContent)
-    p.appendChild(label)
-    p.appendChild(text)
+    title.appendChild(instructions)
+    title.appendChild(inp)
     
-    p.appendChild(radioF)
-    p.appendChild(radioFLabel)
-    p.appendChild(radioC)
-    p.appendChild(radioCLabel)
-    p.appendChild(button)
-    p.appendChild(output)
-    app.appendChild(p)
+    tempPick.appendChild(radioF)
+    tempPick.appendChild(radioFLabel)
+    tempPick.appendChild(radioC)
+    tempPick.appendChild(radioCLabel)
+    tempPick.appendChild(button)
+    out.appendChild(output)
+    app.appendChild(title)
+    app.appendChild(tempPick)
+    app.appendChild(out)
 
     const convert = () => {
         const temp = document.getElementById('temp').value
+        const toC = document.getElementById('toC')
+        const toF = document.getElementById('toF')
+
+        console.log(temp)
         let result = 0
 
-        // result = (temp - 32) / 1.8
-        if(document.getElementById('toC').checked){
-            console.log('to celcius')
-            result = (parseInt(temp) - 32) / 1.8
-            console.log(result)
+        if(temp == '' || (!toC.checked && !toF.checked)){
+            const blankErr = 'Must Input a Temperature AND Select a Unit'
+            document.querySelector('output').innerHTML = blankErr
         }
-        else{
-            console.log('to fahrenheit')
-            result = (parseInt(temp) * 1.8)
-            console.log(result)
-            result = result + 32
-            console.log(result)
+        else if(temp != '' & isNaN(temp)){
+            const nanErr = 'Input MUST be a Number'
+            document.querySelector('output').innerHTML = nanErr
         }
 
-        console.log(result)
-        
-        const output = result
-        document.querySelector('output').innerHTML = output
+        else{
+            // result = (temp - 32) / 1.8
+            if(toC.checked){
+                console.log('to celcius')
+                result = (parseInt(temp) - 32) / 1.8
+                console.log(result)
+            }
+            else{
+                console.log('to fahrenheit')
+                result = (parseInt(temp) * 1.8) + 32
+                console.log(result)
+            }
+
+            console.log(result)
+            
+            const output = result
+            document.querySelector('output').innerHTML = output
+        }
     }
     
     document.getElementById('btnConvert').addEventListener('click', function(){convert('F')}, false)
-    
-    
-    
-
-    
-
 }
